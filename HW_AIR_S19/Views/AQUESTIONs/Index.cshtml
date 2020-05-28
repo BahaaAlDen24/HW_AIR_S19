@@ -1,0 +1,46 @@
+﻿@model IEnumerable<HW_AIR_S19.Models.AQUESTION>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.VALUE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ANSWER)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Indexed)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.VALUE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ANSWER)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Indexed)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

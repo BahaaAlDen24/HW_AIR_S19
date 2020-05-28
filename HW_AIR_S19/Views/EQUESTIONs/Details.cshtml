@@ -1,0 +1,43 @@
+﻿@model HW_AIR_S19.Models.EQUESTION
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EQUESTION</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VALUE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VALUE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ANSWER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ANSWER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Indexed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Indexed)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

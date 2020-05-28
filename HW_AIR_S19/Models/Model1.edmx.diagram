@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="be65bf47617a4bd08e19a03eaac6f0a0" Name="Diagram1">
+        <EntityTypeShape EntityType="AIR_S19Model.AQUESTION" Width="1.5" PointX="0.625" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AIR_S19Model.AQUESTIONTERM" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="AIR_S19Model.ATERM" Width="1.5" PointX="5.375" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AIR_S19Model.EQUESTION" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AIR_S19Model.EQUESTIONTERM" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="AIR_S19Model.ETERM" Width="1.5" PointX="5.375" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="AIR_S19Model.FK__AQUESTION__QUEST__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="AIR_S19Model.FK__AQUESTION__TERMI__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="AIR_S19Model.FK__EQUESTION__QUEST__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="AIR_S19Model.FK__EQUESTION__TERMI__6D0D32F4" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

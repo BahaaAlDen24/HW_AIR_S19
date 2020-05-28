@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AIR_S19Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AQUESTION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="VALUE" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ANSWER" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Indexed" Type="int" />
+        </EntityType>
+        <EntityType Name="AQUESTIONTERM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="QUESTIONID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TERMID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TF" Type="nvarchar" MaxLength="5" />
+          <Property Name="WEIGHT" Type="nvarchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="ATERM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="VALUE" Type="nvarchar(max)" />
+          <Property Name="IDF" Type="nvarchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="EQUESTION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="VALUE" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ANSWER" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Indexed" Type="int" />
+        </EntityType>
+        <EntityType Name="EQUESTIONTERM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="QUESTIONID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TERMID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TF" Type="nvarchar" MaxLength="5" />
+          <Property Name="WEIGHT" Type="nvarchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="ETERM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="VALUE" Type="nvarchar(max)" />
+          <Property Name="IDF" Type="nvarchar" MaxLength="5" />
+        </EntityType>
+        <Association Name="FK__AQUESTION__QUEST__70DDC3D8">
+          <End Role="AQUESTION" Type="Self.AQUESTION" Multiplicity="1" />
+          <End Role="AQUESTIONTERM" Type="Self.AQUESTIONTERM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AQUESTION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AQUESTIONTERM">
+              <PropertyRef Name="QUESTIONID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AQUESTION__TERMI__71D1E811">
+          <End Role="ATERM" Type="Self.ATERM" Multiplicity="1" />
+          <End Role="AQUESTIONTERM" Type="Self.AQUESTIONTERM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ATERM">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AQUESTIONTERM">
+              <PropertyRef Name="TERMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EQUESTION__QUEST__6C190EBB">
+          <End Role="EQUESTION" Type="Self.EQUESTION" Multiplicity="1" />
+          <End Role="EQUESTIONTERM" Type="Self.EQUESTIONTERM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EQUESTION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EQUESTIONTERM">
+              <PropertyRef Name="QUESTIONID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EQUESTION__TERMI__6D0D32F4">
+          <End Role="ETERM" Type="Self.ETERM" Multiplicity="1" />
+          <End Role="EQUESTIONTERM" Type="Self.EQUESTIONTERM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ETERM">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EQUESTIONTERM">
+              <PropertyRef Name="TERMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AIR_S19ModelStoreContainer">
+          <EntitySet Name="AQUESTION" EntityType="Self.AQUESTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AQUESTIONTERM" EntityType="Self.AQUESTIONTERM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ATERM" EntityType="Self.ATERM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EQUESTION" EntityType="Self.EQUESTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EQUESTIONTERM" EntityType="Self.EQUESTIONTERM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ETERM" EntityType="Self.ETERM" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AQUESTION__QUEST__70DDC3D8" Association="Self.FK__AQUESTION__QUEST__70DDC3D8">
+            <End Role="AQUESTION" EntitySet="AQUESTION" />
+            <End Role="AQUESTIONTERM" EntitySet="AQUESTIONTERM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AQUESTION__TERMI__71D1E811" Association="Self.FK__AQUESTION__TERMI__71D1E811">
+            <End Role="ATERM" EntitySet="ATERM" />
+            <End Role="AQUESTIONTERM" EntitySet="AQUESTIONTERM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EQUESTION__QUEST__6C190EBB" Association="Self.FK__EQUESTION__QUEST__6C190EBB">
+            <End Role="EQUESTION" EntitySet="EQUESTION" />
+            <End Role="EQUESTIONTERM" EntitySet="EQUESTIONTERM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EQUESTION__TERMI__6D0D32F4" Association="Self.FK__EQUESTION__TERMI__6D0D32F4">
+            <End Role="ETERM" EntitySet="ETERM" />
+            <End Role="EQUESTIONTERM" EntitySet="EQUESTIONTERM" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AIR_S19Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AQUESTION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="VALUE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ANSWER" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Indexed" Type="Int32" />
+          <NavigationProperty Name="AQUESTIONTERMs" Relationship="Self.FK__AQUESTION__QUEST__70DDC3D8" FromRole="AQUESTION" ToRole="AQUESTIONTERM" />
+        </EntityType>
+        <EntityType Name="AQUESTIONTERM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="QUESTIONID" Type="Guid" Nullable="false" />
+          <Property Name="TERMID" Type="Guid" Nullable="false" />
+          <Property Name="TF" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="WEIGHT" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AQUESTION" Relationship="Self.FK__AQUESTION__QUEST__70DDC3D8" FromRole="AQUESTIONTERM" ToRole="AQUESTION" />
+          <NavigationProperty Name="ATERM" Relationship="Self.FK__AQUESTION__TERMI__71D1E811" FromRole="AQUESTIONTERM" ToRole="ATERM" />
+        </EntityType>
+        <EntityType Name="ATERM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="VALUE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IDF" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AQUESTIONTERMs" Relationship="Self.FK__AQUESTION__TERMI__71D1E811" FromRole="ATERM" ToRole="AQUESTIONTERM" />
+        </EntityType>
+        <EntityType Name="EQUESTION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="VALUE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ANSWER" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Indexed" Type="Int32" />
+          <NavigationProperty Name="EQUESTIONTERMs" Relationship="Self.FK__EQUESTION__QUEST__6C190EBB" FromRole="EQUESTION" ToRole="EQUESTIONTERM" />
+        </EntityType>
+        <EntityType Name="EQUESTIONTERM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="QUESTIONID" Type="Guid" Nullable="false" />
+          <Property Name="TERMID" Type="Guid" Nullable="false" />
+          <Property Name="TF" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="WEIGHT" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EQUESTION" Relationship="Self.FK__EQUESTION__QUEST__6C190EBB" FromRole="EQUESTIONTERM" ToRole="EQUESTION" />
+          <NavigationProperty Name="ETERM" Relationship="Self.FK__EQUESTION__TERMI__6D0D32F4" FromRole="EQUESTIONTERM" ToRole="ETERM" />
+        </EntityType>
+        <EntityType Name="ETERM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="VALUE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IDF" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EQUESTIONTERMs" Relationship="Self.FK__EQUESTION__TERMI__6D0D32F4" FromRole="ETERM" ToRole="EQUESTIONTERM" />
+        </EntityType>
+        <Association Name="FK__AQUESTION__QUEST__70DDC3D8">
+          <End Role="AQUESTION" Type="Self.AQUESTION" Multiplicity="1" />
+          <End Role="AQUESTIONTERM" Type="Self.AQUESTIONTERM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AQUESTION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AQUESTIONTERM">
+              <PropertyRef Name="QUESTIONID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AQUESTION__TERMI__71D1E811">
+          <End Role="ATERM" Type="Self.ATERM" Multiplicity="1" />
+          <End Role="AQUESTIONTERM" Type="Self.AQUESTIONTERM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ATERM">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AQUESTIONTERM">
+              <PropertyRef Name="TERMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EQUESTION__QUEST__6C190EBB">
+          <End Role="EQUESTION" Type="Self.EQUESTION" Multiplicity="1" />
+          <End Role="EQUESTIONTERM" Type="Self.EQUESTIONTERM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EQUESTION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EQUESTIONTERM">
+              <PropertyRef Name="QUESTIONID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EQUESTION__TERMI__6D0D32F4">
+          <End Role="ETERM" Type="Self.ETERM" Multiplicity="1" />
+          <End Role="EQUESTIONTERM" Type="Self.EQUESTIONTERM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ETERM">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EQUESTIONTERM">
+              <PropertyRef Name="TERMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AIR_S19Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AQUESTIONs" EntityType="Self.AQUESTION" />
+          <EntitySet Name="AQUESTIONTERMs" EntityType="Self.AQUESTIONTERM" />
+          <EntitySet Name="ATERMs" EntityType="Self.ATERM" />
+          <EntitySet Name="EQUESTIONs" EntityType="Self.EQUESTION" />
+          <EntitySet Name="EQUESTIONTERMs" EntityType="Self.EQUESTIONTERM" />
+          <EntitySet Name="ETERMs" EntityType="Self.ETERM" />
+          <AssociationSet Name="FK__AQUESTION__QUEST__70DDC3D8" Association="Self.FK__AQUESTION__QUEST__70DDC3D8">
+            <End Role="AQUESTION" EntitySet="AQUESTIONs" />
+            <End Role="AQUESTIONTERM" EntitySet="AQUESTIONTERMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AQUESTION__TERMI__71D1E811" Association="Self.FK__AQUESTION__TERMI__71D1E811">
+            <End Role="ATERM" EntitySet="ATERMs" />
+            <End Role="AQUESTIONTERM" EntitySet="AQUESTIONTERMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EQUESTION__QUEST__6C190EBB" Association="Self.FK__EQUESTION__QUEST__6C190EBB">
+            <End Role="EQUESTION" EntitySet="EQUESTIONs" />
+            <End Role="EQUESTIONTERM" EntitySet="EQUESTIONTERMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EQUESTION__TERMI__6D0D32F4" Association="Self.FK__EQUESTION__TERMI__6D0D32F4">
+            <End Role="ETERM" EntitySet="ETERMs" />
+            <End Role="EQUESTIONTERM" EntitySet="EQUESTIONTERMs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AIR_S19ModelStoreContainer" CdmEntityContainer="AIR_S19Entities1">
+          <EntitySetMapping Name="AQUESTIONs">
+            <EntityTypeMapping TypeName="AIR_S19Model.AQUESTION">
+              <MappingFragment StoreEntitySet="AQUESTION">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+                <ScalarProperty Name="ANSWER" ColumnName="ANSWER" />
+                <ScalarProperty Name="Indexed" ColumnName="Indexed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AQUESTIONTERMs">
+            <EntityTypeMapping TypeName="AIR_S19Model.AQUESTIONTERM">
+              <MappingFragment StoreEntitySet="AQUESTIONTERM">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="QUESTIONID" ColumnName="QUESTIONID" />
+                <ScalarProperty Name="TERMID" ColumnName="TERMID" />
+                <ScalarProperty Name="TF" ColumnName="TF" />
+                <ScalarProperty Name="WEIGHT" ColumnName="WEIGHT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ATERMs">
+            <EntityTypeMapping TypeName="AIR_S19Model.ATERM">
+              <MappingFragment StoreEntitySet="ATERM">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+                <ScalarProperty Name="IDF" ColumnName="IDF" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EQUESTIONs">
+            <EntityTypeMapping TypeName="AIR_S19Model.EQUESTION">
+              <MappingFragment StoreEntitySet="EQUESTION">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+                <ScalarProperty Name="ANSWER" ColumnName="ANSWER" />
+                <ScalarProperty Name="Indexed" ColumnName="Indexed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EQUESTIONTERMs">
+            <EntityTypeMapping TypeName="AIR_S19Model.EQUESTIONTERM">
+              <MappingFragment StoreEntitySet="EQUESTIONTERM">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="QUESTIONID" ColumnName="QUESTIONID" />
+                <ScalarProperty Name="TERMID" ColumnName="TERMID" />
+                <ScalarProperty Name="TF" ColumnName="TF" />
+                <ScalarProperty Name="WEIGHT" ColumnName="WEIGHT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ETERMs">
+            <EntityTypeMapping TypeName="AIR_S19Model.ETERM">
+              <MappingFragment StoreEntitySet="ETERM">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+                <ScalarProperty Name="IDF" ColumnName="IDF" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
