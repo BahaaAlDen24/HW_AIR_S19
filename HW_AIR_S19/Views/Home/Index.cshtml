@@ -162,7 +162,7 @@
     }
 
     function HighLightTerms(Language) {
-        debugger
+
         var Url = "/Home/ETokenize";
 
         if (Language == 1) {
@@ -177,14 +177,12 @@
 
         var tempInnerText = document.body.innerHTML;
 
-        debugger
         $.ajax({
             type: "POST",
             url: Url,
             data: JSON.stringify(Query),
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                debugger
                 if (data.length > 0) {
                     for (var i = 0; i < data.length; i++) {
                         var Term = new RegExp(data[i].Term,"gi");
@@ -196,7 +194,6 @@
                 }
             },
             error: function () {
-                debugger
                 alert("Error occured!!")
             }
         });
