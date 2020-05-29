@@ -51,6 +51,7 @@ namespace HW_AIR_S19.Controllers
             if (ModelState.IsValid)
             {
                 aQUESTION.ID = Guid.NewGuid();
+                aQUESTION.Indexed = 0;
                 db.AQUESTIONs.Add(aQUESTION);
                 db.SaveChanges();
                 return RedirectToAction("Index");

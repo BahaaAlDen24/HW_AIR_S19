@@ -18,6 +18,7 @@ namespace HW_AIR_S19.Models
         public AIR_S19Entities1()
             : base("name=AIR_S19Entities1")
         {
+            Database.SetInitializer(new CreateDatabaseIfNotExists<AIR_S19Entities1>());
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
