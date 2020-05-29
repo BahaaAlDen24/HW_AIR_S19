@@ -2,26 +2,205 @@
     ViewBag.Title = "Home Page";
 }
 
-<div style="width:800px; margin:0 auto;">
-    <form>
-        <div class="row">
-            <img src="~/Content/Images/img1.png" alt="Search Image" style="align-content:center;">
-            <input class="form-control" type="search" placeholder="Enter your email...">
-            <button class="btn btn-block btn-primary">Search!</button>
+<div id="MainDiv" style="padding:10px; align-items:center;background:#e6e6e6;">
+    <div id="SearchDiv" style="padding:10px;">
+        <h3 style="text-align:center;">AIR-S19 Search Engine</h3>
+
+        <div class="form-group" style="padding:10px; width:70%; margin:0 auto ;">
+            <input style="padding:10px; width:100%; margin:0 auto ;" type="search" class="form-control" id="Query">
         </div>
-        <div class="row">
-            <div>
-                <label>>Search Language  </label>
-                <label class="radio-inline"><input type="radio" name="Language" checked>English</label>
-                <label class="radio-inline"><input type="radio" name="Language">Arabic</label>
-            </div>
-            <div>
-                <label>>Search Model    </label>
-                <label class="radio-inline"><input type="radio" name="SearchModel" checked>Boolean Model</label>
-                <label class="radio-inline"><input type="radio" name="SearchModel">Extend Boolean Model</label>
-                <label class="radio-inline"><input type="radio" name="SearchModel">Vector space Model</label>
-            </div>
+
+        <div style="padding:10px; width:9%; margin:0 auto ;">
+            <button onclick="Search();" class="btn btn-primary">Search</button>
         </div>
-    </form>
-</div>
+
+        <div style="padding:10px; width:41%; margin:0 auto ;">
+            <button onclick="BuildIndex(0)" class="btn btn-success">Build or Update English Index</button>
+            <button onclick="BuildIndex(1)" class="btn btn-success">Build or Update Arabic Index</button>
+        </div>
+
+        <div style="padding:10px; width:43%; margin:0 auto ;">
+            <label class="radio-inline"><input type="radio" value="0" name="Language" checked>English</label>
+            <label class="radio-inline"><input type="radio" value="1" name="Language">Arabic</label>
+        </div>
+
+        <div style="padding:10px; width:43%; margin:0 auto ;">
+            <label class="radio-inline"><input type="radio" value="0" name="SearchModel" checked>Boolean Model</label>
+            <label class="radio-inline"><input type="radio" value="1" name="SearchModel">Extend Boolean Model</label>
+            <label class="radio-inline"><input type="radio" value="2" name="SearchModel">Vector space Model</label>
+        </div>
+            
+   </div>
+
+    <div id="SearchResultDiv" style="padding:10px; background:#e6e6e6; display:none;">
+        <h3 style="text-align:center;">Search Results :</h3>
+        <div id="SearchResult">
+        </div>
+    </div>
+
+    <div id="IndexResultDiv" style="padding:10px; background:#e6e6e6; display:none;">
+        <h3 id="IndexTitle" style="text-align:center;">Indexing ... please wait</h3>
+        <h4 id="IndexDetails" style="text-align:center;"></h4>
+        <div id="Loader" class="loader" style="display:none"></div>
+
+        </div>
+    </div>
+
+
+<script type="text/javascript">
+
+    function Search() {
+        var Query = {
+            Query: $("#Query").val()
+        };
+
+        var Url = "/Home/EBooleanModelSearch";
+
+        var Language = $("input[name='Language']:checked").val();
+        var SearchModel = $("input[name='SearchModel']:checked").val();
+
+        switch (Language) {
+            case "0":
+                switch (SearchModel) {
+                    case "0":
+                        Url = "/Home/EBooleanModelSearch";
+                        break;
+                    case "1":
+                        Url = "/Home/EExtendBooleanModelSearch";
+                        break;
+                    case "2":
+                        Url = "/Home/EVectorSpaceModelSearch";
+                        break;
+                }
+                break;
+            case "1":
+                switch (SearchModel) {
+                    case "0":
+                        Url = "/Home/ABooleanModelSearch";
+                        break;
+                    case "1":
+                        Url = "/Home/AExtendBooleanModelSearch";
+                        break;
+                    case "2":
+                        Url = "/Home/AVectorSpaceModelSearch";
+                        break;
+                }
+                break;
+        }
+
         
+        $.ajax({
+            type: "POST",
+            url: Url ,
+            data: JSON.stringify(Query),
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                
+                $("#IndexResultDiv").hide();
+                $("#SearchResultDiv").show();
+                $("#SearchResult").empty();
+
+                if (data.length > 0){
+                    for (var i = 0; i < data.length; i++){
+
+                        var Item = '<div class="card" style="padding:10px; margin:10px; background:white;">' 
+                            +'<div class="card-body">'
+                            +'  <div class="row">'
+                            + '      <h5 class="col-sm-10 card-title">' + data[i].Question + '</h5>'
+                            + '      <h5 class="col-sm-2 card-title">Rank :' + data[i].Rank + '</h5>'
+                            +'  </div>'
+                            +'<hr style="border-color:#cccccc; margin-top:0 !important;" />'
+                            + '<p class="card-text">' + data[i].Answer  + '</p>'
+                            +'</div >'
+                            + '</div >'
+
+                        $("#SearchResult").append(Item);
+                    }
+                    HighLightTerms(Language);
+                }
+            },
+            error: function () {
+               
+                alert("Error occured!!")
+            }
+        });
+    }
+
+
+    function BuildIndex(Language) {
+        
+        $("#SearchResultDiv").hide();
+        $("#IndexResultDiv").show();
+        
+        var Url = "/Home/EBuildIndex";
+
+        if (Language == 1){
+            Url = "/Home/ABuildIndex";
+        } 
+
+        
+        $.ajax({
+            type: "GET",
+            url: Url,
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                
+                $("#IndexTitle").text('Indexing finsihed Sucessfully ....');
+                $("#IndexDetails").text(data.QuestionCount + " Questions and  " + data.TermsCount + " Terms has been indexed .");
+            },
+            beforeSend: function () {
+                $('#Loader').show();
+            },
+            complete: function () {
+                $('#Loader').hide();
+            },
+            error: function () {
+                
+                alert("Error occured!!")
+            }
+        });
+    }
+
+    function HighLightTerms(Language) {
+        debugger
+        var Url = "/Home/ETokenize";
+
+        if (Language == 1) {
+            Url = "/Home/ATokenize";
+        }
+
+        var Query = {
+            Query: $("#Query").val()
+        };
+
+        var QueryText = $("#Query").val();
+
+        var tempInnerText = document.body.innerHTML;
+
+        debugger
+        $.ajax({
+            type: "POST",
+            url: Url,
+            data: JSON.stringify(Query),
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                debugger
+                if (data.length > 0) {
+                    for (var i = 0; i < data.length; i++) {
+                        var Term = new RegExp(data[i].Term,"gi");
+                        tempInnerText = tempInnerText.replace(Term, "<mark>page</mark>");
+                    }
+
+                    document.body.innerHTML = tempInnerText;
+                    $("#Query").val(QueryText);
+                }
+            },
+            error: function () {
+                debugger
+                alert("Error occured!!")
+            }
+        });
+    }
+
+</script>
+

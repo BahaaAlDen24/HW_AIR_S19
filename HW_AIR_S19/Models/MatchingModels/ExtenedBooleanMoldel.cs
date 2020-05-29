@@ -20,6 +20,9 @@ namespace HW_AIR_S19.Models.MatchingModels
                 // rank the document against the search terms
                 var rank = VectorModel.ACosineSimilarity(Query, Question);
 
+                while (RankedQuestions.ContainsKey(rank))
+                    rank += 0.00001;
+
                 // record the score so we can rank and return it
                 RankedQuestions.Add(rank, Question);
             }
@@ -38,6 +41,9 @@ namespace HW_AIR_S19.Models.MatchingModels
             {
                 // rank the document against the search terms
                 var rank = VectorModel.ECosineSimilarity(Query, Question);
+
+                while (RankedQuestions.ContainsKey(rank))
+                    rank += 0.00001;
 
                 // record the score so we can rank and return it
                 RankedQuestions.Add(rank, Question);
