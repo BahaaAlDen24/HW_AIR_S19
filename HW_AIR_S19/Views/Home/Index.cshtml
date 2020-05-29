@@ -186,7 +186,7 @@
                 if (data.length > 0) {
                     for (var i = 0; i < data.length; i++) {
                         var Term = new RegExp(data[i].Term,"gi");
-                        tempInnerText = tempInnerText.replace(Term, "<mark>page</mark>");
+                        tempInnerText = tempInnerText.replace(Term, "<mark>" + data[i].Term + "</mark>");
                     }
 
                     document.body.innerHTML = tempInnerText;

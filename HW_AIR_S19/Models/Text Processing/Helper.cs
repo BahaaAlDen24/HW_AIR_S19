@@ -42,7 +42,7 @@ namespace HW_AIR_S19.Models.TextProcessing
 			"whereafter", "whereas", "whereby", "wherein", "whereupon", "wherever", "whether",
 			"which", "while", "whither", "who", "whoever", "whole", "whom", "whose", "why", "will",
 			"with", "within", "without", "would", "yet", "you", "your", "yours", "yourself", 
-			"yourselves", "the" 
+			"yourselves", "the" ,"i"
 		});
 
         private static HashSet<String> ArabicStopWords = new HashSet<String>(new String[]{
