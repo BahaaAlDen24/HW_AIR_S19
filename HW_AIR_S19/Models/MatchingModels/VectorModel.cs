@@ -24,7 +24,7 @@ namespace HW_AIR_S19.Models.MatchingModels
             }
 
             // sort by score and return
-            return (Dictionary<double, AQUESTION>)RankedQuestions.OrderByDescending(s => s.Key);
+            return RankedQuestions;
         }
 
         public static Dictionary<double, EQUESTION> EnglishSearch(string Query)
@@ -42,7 +42,7 @@ namespace HW_AIR_S19.Models.MatchingModels
             }
 
             // sort by score and return
-            return (Dictionary<double, EQUESTION>)RankedQuestions.OrderByDescending(s => s.Key);
+            return RankedQuestions;
         }
 
 

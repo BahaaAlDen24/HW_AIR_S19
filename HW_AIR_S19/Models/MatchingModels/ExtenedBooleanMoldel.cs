@@ -25,7 +25,7 @@ namespace HW_AIR_S19.Models.MatchingModels
             }
 
             // sort by score and return
-            return (Dictionary<double, AQUESTION>)RankedQuestions.OrderByDescending(s => s.Key);
+            return RankedQuestions;
         }
 
         public static Dictionary<double, EQUESTION> EnglishSearch(string Query)
@@ -34,7 +34,7 @@ namespace HW_AIR_S19.Models.MatchingModels
 
             var Questions = BooleanModel.EnglishSearch(Query);
 
-            foreach (EQUESTION Question in Index.db.EQUESTIONs)
+            foreach (EQUESTION Question in Questions)
             {
                 // rank the document against the search terms
                 var rank = VectorModel.ECosineSimilarity(Query, Question);
@@ -44,7 +44,7 @@ namespace HW_AIR_S19.Models.MatchingModels
             }
 
             // sort by score and return
-            return (Dictionary<double, EQUESTION>)RankedQuestions.OrderByDescending(s => s.Key);
+            return RankedQuestions;
         }
     }
 }

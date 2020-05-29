@@ -56,18 +56,18 @@ namespace HW_AIR_S19.Models.MatchingModels
 
             BooleanQuerySpliter(Query, ref AndTerms,ref  OrTerms,ref NotTerms);
 
-            if (String.IsNullOrEmpty(AndTerms)) { 
+            if (!String.IsNullOrEmpty(AndTerms)) { 
                 IDictionary<string, Int32> AndStemmedTerms = AndTerms.EnglishTokenize();
                 MatchedQuestions = GetETermsQuestions(AndStemmedTerms);
             }
 
-            if (String.IsNullOrEmpty(OrTerms))
+            if (!String.IsNullOrEmpty(OrTerms))
             {
                 IDictionary<string, Int32> OrStemmedTerms = OrTerms.EnglishTokenize();
                 MatchedQuestions.AddRange(GetETermsQuestions(OrStemmedTerms));
             }
 
-            if (String.IsNullOrEmpty(NotTerms))
+            if (!String.IsNullOrEmpty(NotTerms))
             {
                 IDictionary<string, Int32> NotStemmedTerms = NotTerms.EnglishTokenize();
 
@@ -101,7 +101,7 @@ namespace HW_AIR_S19.Models.MatchingModels
 
                 if (Spliters2.Length == 1)
                 {
-                    OrTerms = Spliters[0];
+                    OrTerms = Spliters2[0];
                 }
                 else if (Spliters2.Length > 1)
                 {
@@ -124,11 +124,18 @@ namespace HW_AIR_S19.Models.MatchingModels
 
                 if (Term != null && (Questions.Count == 0))
                 {
-                    Questions = (List<EQUESTION>)Term.EQUESTIONTERMs;
-
-                }else if (Term != null && ( Questions.Count > 0 ))
+                    foreach (EQUESTIONTERM EQT in Term.EQUESTIONTERMs) {
+                        Questions.Add(EQT.EQUESTION);
+                    }
+                }
+                else if (Term != null && ( Questions.Count > 0 ))
                 {
-                    List<EQUESTION>  NewQuestions = (List<EQUESTION>)Term.EQUESTIONTERMs;
+                    List<EQUESTION> NewQuestions = new List<EQUESTION>();
+
+                    foreach (EQUESTIONTERM EQT in Term.EQUESTIONTERMs)
+                    {
+                        NewQuestions.Add(EQT.EQUESTION);
+                    }
 
                     Questions = (from NewQuestion in NewQuestions
                                  join OldQuestion in Questions
@@ -153,12 +160,19 @@ namespace HW_AIR_S19.Models.MatchingModels
 
                 if (Term != null && (Questions.Count == 0))
                 {
-                    Questions = (List<AQUESTION>)Term.AQUESTIONTERMs;
-
+                    foreach(AQUESTIONTERM AQT in Term.AQUESTIONTERMs)
+                    {
+                        Questions.Add(AQT.AQUESTION);
+                    }
                 }
                 else if (Term != null && (Questions.Count > 0))
                 {
-                    List<AQUESTION> NewQuestions = (List<AQUESTION>)Term.AQUESTIONTERMs;
+                    List<AQUESTION> NewQuestions = new List<AQUESTION>() ;
+
+                    foreach (AQUESTIONTERM AQT in Term.AQUESTIONTERMs)
+                    {
+                        Questions.Add(AQT.AQUESTION);
+                    }
 
                     Questions = (from NewQuestion in NewQuestions
                                  join OldQuestion in Questions

@@ -1,4 +1,6 @@
-﻿using HW_AIR_S19.Models.MatchingModels;
+﻿using HW_AIR_S19.Models;
+using HW_AIR_S19.Models.MatchingModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,6 @@ namespace HW_AIR_S19.Controllers
     {
         public ActionResult Index()
         {
-            Models.Indexing.Index.BuildEnglishIndex();
             return View();
         }
 
@@ -27,41 +28,80 @@ namespace HW_AIR_S19.Controllers
             return View();
         }
 
-        public ActionResult EBooleanModelSearch(string Query)
+        public JsonResult EBooleanModelSearch(string Query)
         {
-            var Result = BooleanModel.EnglishSearch(Query);
-            return View();
+            List<EQUESTION> Result = BooleanModel.EnglishSearch(Query);
+
+            var JsonRes = Result.Select(Q => new {
+                Question = Q.VALUE,
+                Answer = Q.ANSWER
+            });
+
+            return Json(JsonRes, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult ABooleanModelSearch(string Query)
+        public JsonResult ABooleanModelSearch(string Query)
         {
-            var Result = BooleanModel.ArabicSearch(Query);
-            return View();
+            List<AQUESTION> Result = BooleanModel.ArabicSearch(Query);
+
+            var JsonRes = Result.Select(Q => new {
+                Question = Q.VALUE,
+                Answer = Q.ANSWER
+            });
+
+            return Json(JsonRes, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult EExtendBooleanModelSearch(string Query)
         {
-            var Result = ExtenedBooleanMoldel.EnglishSearch(Query);
-            return View();
+            Dictionary<double, EQUESTION> Result = ExtenedBooleanMoldel.EnglishSearch(Query);
+
+            var JsonRes = Result.Select(Q => new {
+                Question = Q.Value.VALUE,
+                Answer = Q.Value.ANSWER,
+                Rank = Q.Key
+            }).OrderByDescending(R => R.Rank);
+
+            return Json(JsonRes, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult AExtendBooleanModelSearch(string Query)
         {
-            var Result = ExtenedBooleanMoldel.ArabicSearch(Query);
-            return View();
+            Dictionary<double, AQUESTION> Result = ExtenedBooleanMoldel.ArabicSearch(Query);
+
+            var JsonRes = Result.Select(Q => new {
+                Question = Q.Value.VALUE,
+                Answer = Q.Value.ANSWER,
+                Rank = Q.Key
+            }).OrderByDescending(R => R.Rank);
+
+            return Json(JsonRes, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult EVectorSpaceModelSearch(string Query)
+        public JsonResult EVectorSpaceModelSearch(string Query)
         {
-            var Result = VectorModel.EnglishSearch(Query);
-            return View();
+            Dictionary<double, EQUESTION> Result = VectorModel.EnglishSearch(Query);
+
+            var JsonRes = Result.Select(Q => new {
+                Question = Q.Value.VALUE,
+                Answer = Q.Value.ANSWER,
+                Rank = Q.Key
+            }).OrderByDescending(R => R.Rank);
+
+            return Json(JsonRes, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult AVectorSpaceModelSearch(string Query)
+        public JsonResult AVectorSpaceModelSearch(string Query)
         {
-            var Result = VectorModel.EnglishSearch(Query);
-            return View();
-        }
+            Dictionary<double, AQUESTION> Result = VectorModel.ArabicSearch(Query);
 
+            var JsonRes = Result.Select(Q => new {
+                Question = Q.Value.VALUE,
+                Answer = Q.Value.ANSWER,
+                Rank = Q.Key
+            }).OrderByDescending(R => R.Rank);
+
+            return Json(JsonRes, JsonRequestBehavior.AllowGet);
+        }
     }
 }
