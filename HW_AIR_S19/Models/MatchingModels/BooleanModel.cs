@@ -19,19 +19,19 @@ namespace HW_AIR_S19.Models.MatchingModels
 
             BooleanQuerySpliter(Query, ref AndTerms, ref OrTerms, ref NotTerms);
 
-            if (String.IsNullOrEmpty(AndTerms))
+            if (!String.IsNullOrEmpty(AndTerms))
             {
                 IDictionary<string, Int32> AndStemmedTerms = AndTerms.ArabicTokenize();
                 MatchedQuestions = GetATermsQuestions(AndStemmedTerms);
             }
 
-            if (String.IsNullOrEmpty(OrTerms))
+            if (!String.IsNullOrEmpty(OrTerms))
             {
                 IDictionary<string, Int32> OrStemmedTerms = OrTerms.ArabicTokenize();
                 MatchedQuestions.AddRange(GetATermsQuestions(OrStemmedTerms));
             }
 
-            if (String.IsNullOrEmpty(NotTerms))
+            if (!String.IsNullOrEmpty(NotTerms))
             {
                 IDictionary<string, Int32> NotStemmedTerms = NotTerms.ArabicTokenize();
 
