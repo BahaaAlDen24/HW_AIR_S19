@@ -33,7 +33,7 @@
    </div>
 
     <div id="SearchResultDiv" style="padding:10px; background:#e6e6e6; display:none;">
-        <h3 style="text-align:center;">Search Results :</h3>
+        <h3 style="text-align:center;" id="SearchResults" >Search Results :</h3>
         <div id="SearchResult">
         </div>
     </div>
@@ -101,6 +101,18 @@
                 $("#SearchResultDiv").show();
                 $("#SearchResult").empty();
 
+                var Item = '<div class="card" style="padding:10px; margin:10px; background:white;">'
+                    + '<div class="card-body">'
+                    + '  <div class="row">'
+                    + '      <h5 class="col-sm-10 card-title">Your Query</h5>'
+                    + '  </div>'
+                    + '<hr style="border-color:#cccccc; margin-top:0 !important;" />'
+                    + '<p class="card-text">' + $("#Query").val() + '</p>'
+                    + '</div >'
+                    + '</div >'
+
+                $("#SearchResult").append(Item);
+
                 if (data.length > 0){
                     for (var i = 0; i < data.length; i++){
 
@@ -119,6 +131,7 @@
                     }
                     HighLightTerms(Language, SearchModel);
                 }
+                $("#SearchResults").text('No results matched your search ....');
             },
             error: function () {
                

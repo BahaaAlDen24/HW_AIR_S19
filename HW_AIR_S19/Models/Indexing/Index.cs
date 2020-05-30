@@ -35,7 +35,6 @@ namespace HW_AIR_S19.Models.Indexing
                     {
                         Term.IDF = (Convert.ToInt32(Term.IDF) + 1).ToString();
                         db.Entry(Term).State = EntityState.Modified;
-                        db.SaveChanges();
                     }
                     else
                     {
@@ -45,7 +44,6 @@ namespace HW_AIR_S19.Models.Indexing
                         Term.VALUE = key;
                         Term.IDF = Frequency.ToString();
                         db.ETERMs.Add(Term);
-                        db.SaveChanges();
                     }
 
                     EQUESTIONTERM QuestionTerm = db.EQUESTIONTERMs.Where(QT => QT.TERMID == Term.ID && QT.QUESTIONID == Question.ID).FirstOrDefault<EQUESTIONTERM>();
@@ -56,7 +54,6 @@ namespace HW_AIR_S19.Models.Indexing
                         QuestionTerm.TERMID = Term.ID;
                         QuestionTerm.TF = Frequency.ToString();
                         db.EQUESTIONTERMs.Add(QuestionTerm);
-                        db.SaveChanges();
                     }
                 }
 
@@ -70,8 +67,8 @@ namespace HW_AIR_S19.Models.Indexing
                 {
                     QuestionTerm.WEIGHT = (Math.Round(Convert.ToDouble(QuestionTerm.TF) * Math.Log(NumberOfQuestions / Convert.ToDouble(QuestionTerm.ETERM.IDF)), 2)).ToString();
                     db.Entry(QuestionTerm).State = EntityState.Modified;
-                    db.SaveChanges();
                 }
+                db.SaveChanges();
 
             }
         }
@@ -97,7 +94,6 @@ namespace HW_AIR_S19.Models.Indexing
                     {
                         Term.IDF = (Convert.ToInt32(Term.IDF) + 1).ToString();
                         db.Entry(Term).State = EntityState.Modified;
-                        db.SaveChanges();
                     }
                     else
                     {
@@ -107,7 +103,6 @@ namespace HW_AIR_S19.Models.Indexing
                         Term.VALUE = key;
                         Term.IDF = Frequency.ToString();
                         db.ATERMs.Add(Term);
-                        db.SaveChanges();
                     }
 
                     AQUESTIONTERM QuestionTerm = db.AQUESTIONTERMs.Where(QT => QT.TERMID == Term.ID && QT.QUESTIONID == Question.ID).FirstOrDefault<AQUESTIONTERM>();
@@ -119,7 +114,6 @@ namespace HW_AIR_S19.Models.Indexing
                         QuestionTerm.TERMID = Term.ID;
                         QuestionTerm.TF = Frequency.ToString();
                         db.AQUESTIONTERMs.Add(QuestionTerm);
-                        db.SaveChanges();
                     }
                 }
 
@@ -133,8 +127,8 @@ namespace HW_AIR_S19.Models.Indexing
                 {
                     QuestionTerm.WEIGHT = (Math.Round(Convert.ToDouble(QuestionTerm.TF) * Math.Log(NumberOfQuestions / Convert.ToDouble(QuestionTerm.ATERM.IDF)), 2)).ToString();
                     db.Entry(QuestionTerm).State = EntityState.Modified;
-                    db.SaveChanges();
                 }
+                db.SaveChanges();
             }
         }
     }
