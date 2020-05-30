@@ -109,6 +109,7 @@ namespace HW_AIR_S19.Controllers
         [HttpPost]
         public JsonResult EVectorSpaceModelSearch(string Query)
         {
+            try { 
             Dictionary<double, EQUESTION> Result = VectorModel.EnglishSearch(Query);
 
             var JsonRes = Result.Select(Q => new {
@@ -118,6 +119,12 @@ namespace HW_AIR_S19.Controllers
             }).OrderByDescending(R => R.Rank);
 
             return Json(JsonRes, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(e.Message, JsonRequestBehavior.AllowGet);
+
+            }
         }
 
 
