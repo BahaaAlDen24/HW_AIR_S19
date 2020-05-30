@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AIR_S19Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="AIR_F19Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AQUESTION">
           <Key>
             <PropertyRef Name="ID" />
@@ -107,7 +107,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="AIR_S19ModelStoreContainer">
+        <EntityContainer Name="AIR_F19ModelStoreContainer">
           <EntitySet Name="AQUESTION" EntityType="Self.AQUESTION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AQUESTIONTERM" EntityType="Self.AQUESTIONTERM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ATERM" EntityType="Self.ATERM" Schema="dbo" store:Type="Tables" />
@@ -135,7 +135,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="AIR_S19Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="AIR_F19Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="AQUESTION">
           <Key>
             <PropertyRef Name="ID" />
@@ -246,7 +246,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="AIR_S19Entities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="AIR_F19Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AQUESTIONs" EntityType="Self.AQUESTION" />
           <EntitySet Name="AQUESTIONTERMs" EntityType="Self.AQUESTIONTERM" />
           <EntitySet Name="ATERMs" EntityType="Self.ATERM" />
@@ -275,9 +275,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="AIR_S19ModelStoreContainer" CdmEntityContainer="AIR_S19Entities1">
+        <EntityContainerMapping StorageEntityContainer="AIR_F19ModelStoreContainer" CdmEntityContainer="AIR_F19Entities1">
           <EntitySetMapping Name="AQUESTIONs">
-            <EntityTypeMapping TypeName="AIR_S19Model.AQUESTION">
+            <EntityTypeMapping TypeName="AIR_F19Model.AQUESTION">
               <MappingFragment StoreEntitySet="AQUESTION">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="VALUE" ColumnName="VALUE" />
@@ -287,7 +287,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AQUESTIONTERMs">
-            <EntityTypeMapping TypeName="AIR_S19Model.AQUESTIONTERM">
+            <EntityTypeMapping TypeName="AIR_F19Model.AQUESTIONTERM">
               <MappingFragment StoreEntitySet="AQUESTIONTERM">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="QUESTIONID" ColumnName="QUESTIONID" />
@@ -298,7 +298,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ATERMs">
-            <EntityTypeMapping TypeName="AIR_S19Model.ATERM">
+            <EntityTypeMapping TypeName="AIR_F19Model.ATERM">
               <MappingFragment StoreEntitySet="ATERM">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="VALUE" ColumnName="VALUE" />
@@ -307,7 +307,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EQUESTIONs">
-            <EntityTypeMapping TypeName="AIR_S19Model.EQUESTION">
+            <EntityTypeMapping TypeName="AIR_F19Model.EQUESTION">
               <MappingFragment StoreEntitySet="EQUESTION">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="VALUE" ColumnName="VALUE" />
@@ -317,7 +317,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EQUESTIONTERMs">
-            <EntityTypeMapping TypeName="AIR_S19Model.EQUESTIONTERM">
+            <EntityTypeMapping TypeName="AIR_F19Model.EQUESTIONTERM">
               <MappingFragment StoreEntitySet="EQUESTIONTERM">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="QUESTIONID" ColumnName="QUESTIONID" />
@@ -328,7 +328,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ETERMs">
-            <EntityTypeMapping TypeName="AIR_S19Model.ETERM">
+            <EntityTypeMapping TypeName="AIR_F19Model.ETERM">
               <MappingFragment StoreEntitySet="ETERM">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="VALUE" ColumnName="VALUE" />

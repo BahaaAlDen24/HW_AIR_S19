@@ -60,6 +60,7 @@ namespace HW_AIR_S19.Models.TextProcessing
             "كان",  "صار","ليس",  "ظل","انفك",  "عاد","مادام",  "برح","مازال",  "مافتئ","فوق",  "و"});
 
         private static PorterStemmer PorterStemmer = new PorterStemmer();
+
         private static ISRIStemmer ISRIStemmer = new ISRIStemmer();
 
         public static IDictionary<string,Int32> EnglishTokenize(this String data)

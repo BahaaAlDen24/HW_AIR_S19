@@ -4,7 +4,7 @@
 
 <div id="MainDiv" style="padding:10px; align-items:center;background:#e6e6e6;">
     <div id="SearchDiv" style="padding:10px;">
-        <h3 style="text-align:center;">AIR-S19 Search Engine</h3>
+        <h3 style="text-align:center;">AIR-F19 Search Engine</h3>
 
         <div class="form-group" style="padding:10px; width:70%; margin:0 auto ;">
             <input style="padding:10px; width:100%; margin:0 auto ;" type="search" class="form-control" id="Query">
@@ -50,6 +50,7 @@
 <script type="text/javascript">
 
     function Search() {
+        debugger
         var Query = {
             Query: $("#Query").val()
         };
@@ -116,7 +117,7 @@
 
                         $("#SearchResult").append(Item);
                     }
-                    HighLightTerms(Language);
+                    HighLightTerms(Language, SearchModel);
                 }
             },
             error: function () {
@@ -161,7 +162,7 @@
         });
     }
 
-    function HighLightTerms(Language) {
+    function HighLightTerms(Language,Model) {
 
         var Url = "/Home/ETokenize";
 
@@ -185,12 +186,17 @@
             success: function (data) {
                 if (data.length > 0) {
                     for (var i = 0; i < data.length; i++) {
-                        var Term = new RegExp(data[i].Term,"gi");
-                        tempInnerText = tempInnerText.replace(Term, "<mark>" + data[i].Term + "</mark>");
+                        debugger
+                        if (data[i].Term.length > 2) {
+                            var Term = new RegExp(data[i].Term,"gi");
+                            tempInnerText = tempInnerText.replace(Term, "<mark>" + data[i].Term + "</mark>");
+                        }
                     }
 
                     document.body.innerHTML = tempInnerText;
                     $("#Query").val(QueryText);
+                    $("input[name=Language][value='" + Language + "']").prop("checked", true);
+                    $("input[name=SearchModel][value='" + Model +"']").prop("checked", true);
                 }
             },
             error: function () {
